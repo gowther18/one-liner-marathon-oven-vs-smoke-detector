@@ -49,8 +49,15 @@ def check_length(text: str) -> None:
         )
 
 
+def check_single_line(text: str) -> None:
+    """Refuse a text that is not one line: the judge reads a one-liner."""
+    if "\n" in text or "\r" in text:
+        raise SystemExit("entry text must be a single line")
+
+
 def main() -> None:
     check_length(JOKE)
+    check_single_line(JOKE)
     out = Path(OUTPUT_DIR)
     out.mkdir(parents=True, exist_ok=True)
     out.joinpath("entry.txt").write_text(JOKE, encoding="utf-8")
